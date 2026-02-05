@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Surprise</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #c62828;
+  font-family: Arial, sans-serif;
+  color: white;
+  flex-direction: column;
+  background-image: url(''); /* optional: you can put a faint pattern image here */
+  background-repeat: repeat;
+  background-size: 80px 80px;
+}
+
+h1 {
+  font-size: 36px;
+  text-align: center;
+  animation: glow 2s infinite alternate;
+  padding: 20px 40px;
+  border: 5px dashed gold; /* frame around the text */
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1); /* slightly transparent background behind text */
+  display: inline-block;
+  box-shadow: 0 0 20px #fff;
+  position: relative;
+}
+
+h1::before, h1::after {
+  content: "📚✏️🎓";
+  font-size: 28px;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+h1::after {
+  top: auto;
+  bottom: -30px;
+}
+
+#buttons {
+  position: relative;
+  height: 150px;
+  width: 300px;
+  margin-top: 30px;
+}
+
+button {
+  padding: 12px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+  animation: bounce 1.5s infinite;
+  transition: all 0.3s;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.yes { background: gold; color: black; left: 20px; }
+.no { background: #444; color: white; right: 20px; }
+
+.credit {
+  position: absolute;
+  bottom: 15px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* glowing animation */
+@keyframes glow {
+  from { text-shadow: 0 0 5px white; }
+  to { text-shadow: 0 0 25px gold; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<h1 id="text">លោកគ្រូស្រឡាញ់សិស្សអត់? ⭐</h1>
+
+<div id="buttons">
+  <button class="yes" onclick="yes()">Yes</button>
+  <button class="no" onclick="run()">No</button>
+</div>
+
+<div class="credit">Created by Piseth Panha</div>
+
+<script>
+function yes() {
+  let t = document.getElementById("text");
+  t.style.opacity = 0;
+
+  setTimeout(() => {
+    t.innerText = "បើលោកគ្រូស្រឡាញ់សិស្ស លោកគ្រូប្រឡងចេញស្រួលៗមក😭😭😭"
+    t.style.opacity = 1;
+  }, 500);
+
+  document.getElementById("music").play();
+  document.getElementById("buttons").style.display = "none";
+
+  stars();
+  schoolDecor();
+}
+
+function run() {
+  let btn = document.querySelector(".no");
+
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 100);
+
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
+
+function stars() {
+  setInterval(() => {
+    let s = document.createElement("div");
+    s.innerHTML = "⭐";
+    s.style.position = "absolute";
+    s.style.left = Math.random() * window.innerWidth + "px";
+    s.style.top = window.innerHeight + "px";
+    s.style.fontSize = "28px";
+    s.style.animation = "float 5s linear";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 5000);
+  }, 150);
+}
+
+function schoolDecor() {
+  const items = ["📚","✏️","🎓","📝","📖","🎒"];
+
+  setInterval(() => {
+    let d = document.createElement("div");
+    d.innerHTML = items[Math.floor(Math.random()*items.length)];
+    d.style.position = "absolute";
+    d.style.left = Math.random() * window.innerWidth + "px";
+    d.style.top = window.innerHeight + "px";
+    d.style.fontSize = "32px";
+    d.style.animation = "float 6s linear";
+    document.body.appendChild(d);
+    setTimeout(() => d.remove(), 6000);
+  }, 250);
+}
+</script>
+
+<style>
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-600px); opacity: 0; }
+}
+</style>
+
+</body>
+</html>
